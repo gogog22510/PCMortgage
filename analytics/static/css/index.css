@@ -1,0 +1,11 @@
+.vertical-center {
+	min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+	min-height: 100vh; /* These two lines are counted as one :-)       */
+
+	display: flex;
+	align-items: center;
+}
+
+.flag.taiwan, .flag.twd {
+	background-image: url(https://handsontable.com/static/bower_components/flag-icon/svg/country-4x3/tw.svg);
+}

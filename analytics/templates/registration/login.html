@@ -1,0 +1,53 @@
+{% extends 'analytics/index.html' %}
+{% load static %}
+{% load analytics_extra %}
+
+{% block header %}
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="{% static 'css/login.css' %}?{% cache_bust %}">
+
+<title>PC Mortgage</title>
+{% endblock %}
+
+{% block content %}
+<main role="main" class="container">
+    <form class="form-signin" method="post" action="{% url 'login' %}">
+        {% if form.errors %}
+            <p style="color: red">Your account doesn't have access to this page. To proceed, please login with an account that has access.</p>
+        {% endif %}
+
+        {% if next %}
+            {% if user.is_authenticated %}
+            <p style="color: red">Your account doesn't have access to this page. To proceed,
+            please login with an account that has access.</p>
+            {% else %}
+            <p style="color: red">Please login to see this page.</p>
+            {% endif %}
+        {% endif %}
+
+        {% csrf_token %}
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <label for="username" class="sr-only">Username</label>
+        <input type="username" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+        <label for="password" class="sr-only">Password</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        <input class="btn btn-lg btn-primary btn-block" type="submit" value="login">
+        <input type="hidden" name="next" value="{{ next }}">
+        {# Assumes you setup the password_reset view in your URLconf #}
+        <!-- <p><a href="{% url 'password_reset' %}">Lost password?</a></p> -->
+    </form>
+</main>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+{% endblock %}
