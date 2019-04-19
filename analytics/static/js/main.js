@@ -28,6 +28,10 @@ var config = {
 };
 
 // initialize hook
+var tableUpdate = function(tb, data) {
+	tb.loadData(data.dataObject);
+};
+
 var cellupdate = function(changes, source) {
 	if(changes != null) {
 		var evt = changes[0];
@@ -37,18 +41,22 @@ var cellupdate = function(changes, source) {
 			pre: evt[2],
 			val: evt[3]
 		};
-		// console.log(changeEvt);
-		$.ajax({
-			url: '/table/t1',
-			type: 'PUT',
-			headers: {'X-CSRFToken': csrftoken},
-			data: changeEvt,
-			dataType : 'json',
-			success: function(result) {
-				// Do something with the result
-				console.log(result);
-			}
-		});
+
+		if (changeEvt.pre != changeEvt.val) {
+			// console.log(changeEvt);
+			$.ajax({
+				url: '/table/t1',
+				type: 'PUT',
+				headers: {'X-CSRFToken': csrftoken},
+				data: changeEvt,
+				dataType : 'json',
+				success: function(result) {
+					// Do something with the result
+					// console.log(result);
+					tableUpdate(tables['t1'], result);
+				}
+			});
+		}
 	}
 };
 
@@ -69,3 +77,7 @@ t1.updateSettings({
 		return cellProperties;
 	}
 });
+
+var tables = {
+	t1: t1
+};

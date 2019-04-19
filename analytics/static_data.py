@@ -32,7 +32,6 @@ def load_static_data():
 	return {'dataObject': dataObject, 'editState': editState}
 
 def update_data(evt):
-	print(evt)
 	row = evt['row']
 	col = evt['col']
 	pre = evt['pre']

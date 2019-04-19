@@ -22,6 +22,6 @@ def update_table(request, name):
 	if request.method == 'PUT':
 		event = ChangeEventSerializer(request.data)
 		stdata.update_data(event.data)
-		return Response({"event": event.data})
+		return Response(stdata.load_static_data())
 	else:
 		return Response({}, status=status.HTTP_404_NOT_FOUND)
