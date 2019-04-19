@@ -25,7 +25,7 @@ SECRET_KEY = 'vwm^@ytk(n!p4vt55dzbpu!7ksj69$6*g2zdwcy_m2s_g1x6@y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'pcmortgage.ysx3wjfmpg.us-east-1.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['localhost', 'pcmortgage.ysx3wjfmpg.us-east-1.elasticbeanstalk.com', 'pcmortgage.gogog22510.net']
 
 
 # Application definition
